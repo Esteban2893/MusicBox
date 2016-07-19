@@ -1,44 +1,74 @@
-@extends('layout.app')
-
-@if(Session::has('message'))
-<div class="alert alert-success alert-dismissible" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  {{Session::get('message')}}
-</div>
-@endif
+@extends('layouts.app')
 
 @section('content')
-<h1>Artists</h1>
-    <div class="row">
-      <div class="col-sm-12">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Opciones</th>
-              </tr>
-            </thead>
-            @foreach($artists as $artist)
-          <tbody>
-                  <tr>
-                    <td>{{$artist->name}}</td>
-                    <td>
-                      <div>
-					            {!!link_to_route('artists.edit', $title = 'Editar', $parameters = $artist, $attributes =
-                      ['class'=>'fa fa-pencil fa-fw'])!!}
-                      </div>
-                      <div>
-                      {!!link_to_route('artists.show', $title = 'Ver', $parameters = $artist, $attributes =
-                      ['class'=>'fa fa-eye'])!!}
-                      </div>
-                      {!!Form::open(['route'=>['artists.destroy', $artist], 'method' => 'DELETE',])!!}
-			                {!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
-		                  {!!Form::close()!!}
+	@parent
 
-				            </td>
-                  </tr>
-                </tbody>
-              @endforeach
-        </table>
-
+	<div class="row">
+	  <div class="col-md-6">
+			<h1>Listado de Artistas</h1>
+		</div>
+	</div>
+	<div class="row">
+	  <div class="col-md-6">
+			@if(count($artists)>0)
+				<table  class="table table-hover">
+					<tr>
+						<th>Ver</th>
+						<th>Editar</th>
+						<th>Eliminar</th>
+						<th>Nombre</th>
+					</tr>
+					@foreach ($artists as $artist)
+						<tr>
+							{{-- Columna botón SHOW --}}
+							<td>
+								<a class="btn btn-default btn-sm"
+									 href="{{ URL::to('artists/' . $artist->id) . '/show' }}" role="button">
+								 	<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+								 </a>
+							</td>
+							{{-- Columna botón EDIT --}}
+							<td>
+								<a class="btn btn-default btn-sm"
+									 href="{{ URL::to('artists/' . $artist->id . '/edit') }}" role="button">
+								 	<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+								 </a>
+							</td>
+							{{-- Columna botón DELETE --}}
+							<td>
+								<!-- Utilizar el método DESTROY /artists/{id} -->
+								<form
+								action="{{ url('/artists', $artist->id) }}"
+								method="post">
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<input type="hidden" name="_method" value="DELETE">
+									<button type="submit" class="btn btn-default btn-sm">
+										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+									</button>
+								</form>
+							</td>
+							{{-- Columna NOMBRE de artista --}}
+							<td>
+								{{ $artist->name }}
+							</td>
+					</tr>
+					@endforeach
+				</table>
+			@else
+				<p>No se encontró ningún registro de artista</p>
+			@endif
+		</div>
+	</div>
+	<div class="row">
+	  <div class="col-md-6">
+			<a href="{{ url('/artists/create') }}"
+				 class="btn btn-primary btn-sm">
+				Registrar nuevo artista
+			</a>
+			<a href="{{ url('/') }}"
+				 class="btn btn-default btn-sm">
+				Inicio
+			</a>
+		</div>
+	</div>
 @stop

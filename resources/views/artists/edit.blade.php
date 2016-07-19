@@ -1,11 +1,26 @@
-@extends('layout.app')
+@extends('layouts.app')
+
 @section('content')
-<h2>Editar artista</h2>
-	{!!Form::model($artist,['route'=>['artists.update',$artist],'method'=>'PUT'])!!}
-  <div class="form-group">
-		{!!Form::label('nombre','Nombre:')!!}
-		{!!Form::text('name',null,['class'=>'form-control','placeholder'=>'Ingresa el Nombre del artista'])!!}
+	@parent
+	<div class="row">
+		<div class="col-md-5">
+			<h1>Editando: {!! $artist->name  !!}</h1>
+	    <hr>
+			<form
+		  method="POST"
+			action="{{ url('/artists', $artist->id) }}"
+			accept-charset="UTF-8">
+				<input type="hidden" name="_method" value="PATCH">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				@include('artists.partials.form',
+					['submitButtonText'=>'Actualizar'])
+    	</form>
+		</div>
 	</div>
-	{!!Form::submit('Actualizar',['class'=>'btn btn-primary'])!!}
-	{!!Form::close()!!}
-	@endsection
+	<div class="row">
+		<div class="col-md-5">
+			@include('errors.list')
+		</div>
+	</div>
+
+@stop

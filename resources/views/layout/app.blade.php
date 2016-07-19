@@ -26,7 +26,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Music box</a>
+                <a class="navbar-brand" href="/">Music Box</a>
             </div>
 
             <div class="navbar-default sidebar" role="navigation">

@@ -1,11 +1,23 @@
-@extends('layout.app')
+@extends('layouts.app')
+
 @section('content')
-<h2>Crear artista</h2>
-	{!!Form::open(['route'=>'artists.store', 'method'=>'POST'])!!}
-	<div class="form-group">
-		{!!Form::label('nombre','Nombre:')!!}
-		{!!Form::text('name',null,['class'=>'form-control','placeholder'=>'Ingresa el Nombre del artista'])!!}
+	@parent
+
+	<div class="row">
+	  <div class="col-md-5">
+			<h1>Nuevo artista</h1>
+	    <hr>
+		</div>
 	</div>
-	{!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!}
-	{!!Form::close()!!}
-	@endsection
+	<div class="row">
+	  <div class="col-md-5">
+			<form action=" {{ url('/artists') }}" method="post">
+				<input type="hidden" name="_token"
+				value="{{ csrf_token() }}">
+				@include('artists.partials.form',['submitButtonText'=>'Agregar'])
+			</form>
+			@include('errors.list')
+		</div>
+	</div>
+
+@stop
