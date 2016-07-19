@@ -39,7 +39,7 @@
                                     <a href="{!!URL::to('/artists/create')!!}"><i class='fa fa-plus fa-fw'></i> Agregar</a>
                                 </li>
                                 <li>
-                                    <a href="{!!URL::to('/artists')!!}"><i class='fa fa-eye'></i> Ver</a>
+                                    <a href="{!!URL::to('/artists')!!}"><i class='fa fa-eye'></i> Ver todos</a>
                                 </li>
                             </ul>
                         </li>
@@ -50,7 +50,7 @@
                                     <a href="#"><i class='fa fa-plus fa-fw'></i> Agregar</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class='fa fa-eye'></i> Ver</a>
+                                    <a href="#"><i class='fa fa-eye'></i> Ver todos</a>
                                 </li>
                             </ul>
                         </li>
@@ -62,10 +62,7 @@
                                   <a href="#"><i class='fa fa-plus fa-fw'></i> Agregar</a>
                               </li>
                               <li>
-                                  <a href="#"><i class='fa fa-eye'></i> Ver</a>
-                              </li>
-                              <li>
-                                  <a href="#"><i class='fa fa-trash-o fa-fw'></i> Eliminar</a>
+                                  <a href="#"><i class='fa fa-eye'></i> Ver todos</a>
                               </li>
                             </ul>
                         </li>

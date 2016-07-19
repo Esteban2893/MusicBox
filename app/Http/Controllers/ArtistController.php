@@ -42,7 +42,7 @@ class ArtistController extends Controller
     Artist::create([
             'name' => $request['name'],
             ]);
-      Session::flash('message','Artista Actualizado Correctamente');
+      Session::flash('message','Artista creado correctamente');
       return redirect('/artists');
   }
 
@@ -54,7 +54,8 @@ class ArtistController extends Controller
    */
   public function show($id)
   {
-      //
+        $artist = Artist::find($id);
+        return view('artists.show',['artist'=> $artist]);
   }
 
   /**
@@ -81,7 +82,7 @@ class ArtistController extends Controller
       $artist = Artist::find($id);
       $artist->fill($request->all());
       $artist->save();
-      Session::flash('message','Artista Actualizado Correctamente');
+      Session::flash('message','Artista actualizado correctamente');
       return Redirect::to('/artists');
   }
 
@@ -93,6 +94,8 @@ class ArtistController extends Controller
    */
   public function destroy($id)
   {
-      //
+      Artist::destroy($id);
+      Session::flash('message','Artista eliminado correctamente');
+      return Redirect::to('/artists');
   }
 }

@@ -1,5 +1,6 @@
 @extends('layout.app')
 @section('content')
+<h2>Editar artista</h2>
 	{!!Form::model($artist,['route'=>['artists.update',$artist],'method'=>'PUT'])!!}
   <div class="form-group">
 		{!!Form::label('nombre','Nombre:')!!}

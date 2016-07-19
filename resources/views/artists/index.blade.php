@@ -16,16 +16,26 @@
             <tr>
               <th>Name</th>
               <th>Opciones</th>
-            </tr>
-          </thead>
+              </tr>
+            </thead>
             @foreach($artists as $artist)
           <tbody>
                   <tr>
                     <td>{{$artist->name}}</td>
                     <td>
+                      <div>
 					            {!!link_to_route('artists.edit', $title = 'Editar', $parameters = $artist, $attributes =
                       ['class'=>'fa fa-pencil fa-fw'])!!}
-				          </td>
+                      </div>
+                      <div>
+                      {!!link_to_route('artists.show', $title = 'Ver', $parameters = $artist, $attributes =
+                      ['class'=>'fa fa-eye'])!!}
+                      </div>
+                      {!!Form::open(['route'=>['artists.destroy', $artist], 'method' => 'DELETE',])!!}
+			                {!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
+		                  {!!Form::close()!!}
+
+				            </td>
                   </tr>
                 </tbody>
               @endforeach
