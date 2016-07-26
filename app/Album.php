@@ -6,16 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Album extends Model
 {
-    //
-    public function artist()
-    {
-      return $this->belongsTo('App\Artist');
+    /**
+     * Obtiene el artista del álbum
+     */
+     public function artist()
+     {
+       return $this->belongsTo('App\Artist');
+     }
 
-    }
-
-    public function tracks()
-    {
-      return $this->belongsToMany('App\Track')
-      ->withPivot('number')->withTimestamps();
-    }
+     /**
+      * Obtiene las pistas que aparecen en el álbu,
+      */
+      public function tracks()
+      {
+        return $this->belongsToMany('App\Track')
+        ->withPivot('number')->withTimestamps();
+      }
 }
